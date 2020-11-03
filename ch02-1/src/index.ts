@@ -1,10 +1,11 @@
 import IPerson from "./person/IPerson"
-import Person, { makePerson } from "./person/Person"    // export default로 지정하면 하나만 가능하기 때문에 { } 없이 import 가능
+import Person from "./person/Person"    // export default로 지정하면 하나만 가능하기 때문에 { } 없이 import 가능
+import Chance from 'chance'
+import * as R from 'ramda'
 
-const testMakePerson = (): void => {
-    let jane: IPerson = makePerson("Jane")
-    let jack: IPerson = makePerson("Jack")
-    console.log(jane, jack)
-}
+const chance = new Chance()
 
-testMakePerson()
+let persons: IPerson[] = R.range(0, 2)
+    .map((n: number) => new Person(chance.name(), chance.age()))
+
+console.log(persons)
